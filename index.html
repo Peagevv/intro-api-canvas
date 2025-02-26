@@ -3,14 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galería de Dibujos</title>
+    <title>Canvas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+
+        canvas {
+            border: 1px solid #ddd;
+            width: 100px;
+            height: 100px;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, sans-serif;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            background-color: #f8f9fa;
+            background-color: #fefefe;
         }
         .card {
             width: 200px;
@@ -27,13 +35,14 @@
             text-align: center;
         }
         canvas {
-            border: 1px solid #ddd;
+            border: 1px solid #f3f1f1;
             width: 100px;
             height: 100px;
         }
     </style>
 </head>
-<body>
+
+<body class="bg-dark d-flex flex-wrap justify-content-center align-items-center min-vh-100 p-4"></body>
     <script>
         function createCard(title, drawFunction) {
             let card = document.createElement("div");
@@ -67,7 +76,7 @@
             ctx.closePath();
             ctx.fillStyle = "black";
             ctx.fill();
-            ctx.strokeStyle = "red";
+            ctx.strokeStyle = "purple";
             ctx.lineWidth = 2;
             ctx.stroke();
 
@@ -128,12 +137,7 @@
             ctx.stroke();
         }
 
-        function drawCubicCurves(ctx) {
-            ctx.beginPath();
-            ctx.moveTo(10, 80);
-            ctx.bezierCurveTo(30, 20, 70, 20, 90, 80);
-            ctx.stroke();
-        }
+        
 
         function drawRoundedRect(ctx) {
             // Dibuja un cuadrado
@@ -229,7 +233,7 @@
             ctx.bezierCurveTo(30, 70, 50, 90, 50, 110);  // Curva inferior izquierda
             ctx.bezierCurveTo(50, 90, 70, 70, 70, 50);  // Curva inferior derecha
             ctx.bezierCurveTo(70, 20, 50, 20, 50, 40);  // Curva derecha
-            ctx.fillStyle = "red";
+            ctx.fillStyle = "black";
             ctx.fill();
         }
 
@@ -239,10 +243,15 @@
         createCard("Triángulos Variados", drawVariedTriangles);
         createCard("Patrón de Arcos", drawArcs);
         createCard("Curvas", drawQuadraticCurves);
-        createCard("Segunda", drawCubicCurves);
         createCard("Rectángulos Redondeados", drawRoundedRect);
-        createCard("Path2D (Rectángulo y Círculo)", drawPath2D);
+        createCard("PacMan", drawPath2D);
         createCard("Corazón", drawHeart);  // Nueva tarjeta con el corazón
     </script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+     
+     <footer class="bg-dark text-white text-center py-3 mt-auto w-100">
+        &copy; 2025 creado por Karla Denisse Hernández Moguel.
+    </footer>
+    
 </body>
 </html>
