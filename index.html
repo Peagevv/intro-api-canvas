@@ -3,35 +3,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Intro Canvas</title>
-    <!-- Enlace al CSS de Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Enlace a Google Fonts para una tipografía más moderna -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>Galería de Dibujos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            background-color: #f8f9fa;
+        }
+        .card {
+            width: 200px;
+            height: 250px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            text-align: center;
+        }
+        canvas {
+            border: 1px solid #ddd;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
 </head>
-<body class="bg-light py-5">
+<body>
+    <script>
+        function createCard(title, drawFunction) {
+            let card = document.createElement("div");
+            card.className = "card";
 
-    <div class="container">
-        <!-- Card de Bootstrap con sombra y bordes redondeados -->
-        <div class="card shadow rounded-3">
-            <div class="card-header bg-primary text-white text-center py-3">
-                <h5 class="card-title mb-0">Canvas</h5>
-            </div>
-            <div class="card-body p-0">
-                <!-- Contenedor del canvas con borde y sombra -->
-                <div class="border border-1 shadow-sm m-3">
-                    <!-- Canvas contenido en la card -->
-                    <canvas id="canvas" width="500" height="500" class="w-100 rounded-3"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
+            let titleElement = document.createElement("h3");
+            titleElement.innerText = title;
+            card.appendChild(titleElement);
 
-    <!-- Enlace a JS de Bootstrap 5 -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+            let canvas = document.createElement("canvas");
+            canvas.width = 100;
+            canvas.height = 100;
+            card.appendChild(canvas);
 
-    <!-- Script para dibujar en el canvas -->
-    <script src="js/script.js"></script>
+            document.body.appendChild(card);
+            let ctx = canvas.getContext("2d");
+            drawFunction(ctx, canvas);
+        }
 
+        function drawRectangles(ctx) {
+            ctx.fillStyle = "black";
+            ctx.fillRect(10, 10, 80, 80);
+            ctx.clearRect(30, 30, 40, 40);
+        }
+
+        function drawTriangle(ctx) {
+
+             ctx.fillStyle = "black";
+
+        // Dibuja el primer triángulo
+        ctx.beginPath();
+        ctx.moveTo(20, 20);
+        ctx.lineTo(80, 20);
+        ctx.lineTo(80, 80);
+        ctx.fill();
+
+        // Dibuja el segundo triángulo con una ligera separación
+        ctx.beginPath();
+        ctx.moveTo(90, 20);  // Desplazamos 10px hacia la derecha
+        ctx.lineTo(150, 20);
+        ctx.lineTo(150, 80);
+        ctx.fill();
+
+        // Dibuja el tercer triángulo con una ligera separación
+        ctx.beginPath();
+        ctx.moveTo(160, 20);  // Desplazamos 10px más hacia la derecha
+        ctx.lineTo(220, 20);
+        ctx.lineTo(220, 80);
+        ctx.fill();
+
+        // Dibuja el borde del rectángulo
+        ctx.strokeRect(20, 20, 60, 60);
+        }
+
+        function drawSmiley(ctx) {
+            ctx.beginPath();
+            ctx.arc(50, 50, 30, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(40, 40, 3, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(60, 40, 3, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(50, 50, 15, 0, Math.PI);
+            ctx.stroke();
+        }
+
+        function drawVariedTriangles(ctx) {
+            ctx.fillStyle = "black";
+            ctx.beginPath();
+            ctx.moveTo(20, 20);
+            ctx.lineTo(80, 20);
+            ctx.lineTo(80, 80);
+            ctx.fill();
+            ctx.strokeRect(20, 20, 60, 60);
+        }
+
+        function drawArcs(ctx) {
+            ctx.lineWidth = 2;
+            for (let i = 0; i < 3; i++) {
+                for (let j = 0; j < 3; j++) {
+                    ctx.beginPath();
+                    ctx.arc(20 + i * 30, 20 + j * 30, 10, 0, Math.PI * (i % 2 == 0 ? 1 : 2));
+                    ctx.stroke();
+                }
+            }
+        }
+
+        function drawQuadraticCurves(ctx) {
+            ctx.beginPath();
+            ctx.moveTo(20, 80);
+            ctx.quadraticCurveTo(50, 20, 80, 80);
+            ctx.stroke();
+        }
+
+        function drawCubicCurves(ctx) {
+            ctx.beginPath();
+            ctx.moveTo(10, 80);
+            ctx.bezierCurveTo(30, 20, 70, 20, 90, 80);
+            ctx.stroke();
+        }
+
+        function drawRoundedRect(ctx) {
+            // Dibuja un cuadrado
+            ctx.fillStyle = "black";
+            ctx.fillRect(10, 10, 40, 40);
+
+            // Dibuja un círculo relleno al lado del cuadrado
+            ctx.beginPath();
+            ctx.arc(80, 30, 20, 0, Math.PI * 2);  // Círculo en la posición correcta
+            ctx.fillStyle = "black";
+            ctx.fill();
+        }
+
+        function drawPath2D(ctx, canvas) {
+            const path2D = new Path2D();
+
+            roundedRect(ctx, 12, 12, 150, 150, 15);
+            roundedRect(ctx, 19, 19, 150, 150, 9);
+            roundedRect(ctx, 53, 53, 49, 33, 10);
+            roundedRect(ctx, 53, 119, 49, 16, 6);
+            roundedRect(ctx, 135, 53, 49, 33, 10);
+            roundedRect(ctx, 135, 119, 25, 49, 10);
+
+            ctx.beginPath();
+            ctx.arc(37, 37, 13, Math.PI / 7, -Math.PI / 7, false);
+            ctx.lineTo(31, 37);
+            ctx.fill();
+
+            for (let i = 0; i < 8; i++) {
+                ctx.fillRect(51 + i * 16, 35, 4, 4);
+            }
+
+            for (let i = 0; i < 6; i++) {
+                ctx.fillRect(115, 51 + i * 16, 4, 4);
+            }
+
+            for (let i = 0; i < 8; i++) {
+                ctx.fillRect(51 + i * 16, 99, 4, 4);
+            }
+
+            ctx.beginPath();
+            ctx.moveTo(83, 116);
+            ctx.lineTo(83, 102);
+            ctx.bezierCurveTo(83, 94, 89, 88, 97, 88);
+            ctx.bezierCurveTo(105, 88, 111, 94, 111, 102);
+            ctx.lineTo(111, 116);
+            ctx.lineTo(106.333, 111.333);
+            ctx.lineTo(101.666, 116);
+            ctx.lineTo(97, 111.333);
+            ctx.lineTo(92.333, 116);
+            ctx.lineTo(87.666, 111.333);
+            ctx.lineTo(83, 116);
+            ctx.fill();
+
+            ctx.fillStyle = "white";
+            ctx.beginPath();
+            ctx.moveTo(91, 96);
+            ctx.bezierCurveTo(88, 96, 87, 99, 87, 101);
+            ctx.bezierCurveTo(87, 103, 88, 106, 91, 106);
+            ctx.bezierCurveTo(94, 106, 95, 103, 95, 101);
+            ctx.bezierCurveTo(95, 99, 94, 96, 91, 96);
+            ctx.moveTo(103, 96);
+            ctx.bezierCurveTo(100, 96, 99, 99, 99, 101);
+            ctx.bezierCurveTo(99, 103, 100, 106, 103, 106);
+            ctx.bezierCurveTo(106, 106, 107, 103, 107, 101);
+            ctx.bezierCurveTo(107, 99, 106, 96, 103, 96);
+            ctx.fill();
+
+            ctx.fillStyle = "black";
+            ctx.beginPath();
+            ctx.arc(101, 102, 2, 0, Math.PI * 2, true);
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.arc(89, 102, 2, 0, Math.PI * 2, true);
+            ctx.fill();
+        }
+
+        function roundedRect(ctx, x, y, width, height, radius) {
+            ctx.beginPath();
+            ctx.moveTo(x, y + radius);
+            ctx.arcTo(x, y + height, x + radius, y + height, radius);
+            ctx.arcTo(x + width, y + height, x + width, y + height - radius, radius);
+            ctx.arcTo(x + width, y, x + width - radius, y, radius);
+            ctx.arcTo(x, y, x, y + radius, radius);
+            ctx.stroke();
+        }
+
+        function drawHeart(ctx) {
+            ctx.beginPath();
+            ctx.moveTo(50, 40);  // Punto inicial
+            ctx.bezierCurveTo(50, 20, 30, 20, 30, 50);  // Curva izquierda
+            ctx.bezierCurveTo(30, 70, 50, 90, 50, 110);  // Curva inferior izquierda
+            ctx.bezierCurveTo(50, 90, 70, 70, 70, 50);  // Curva inferior derecha
+            ctx.bezierCurveTo(70, 20, 50, 20, 50, 40);  // Curva derecha
+            ctx.fillStyle = "red";
+            ctx.fill();
+        }
+
+        createCard("Rectángulos", drawRectangles);
+        createCard("Triángulo", drawTriangle);
+        createCard("Carita Feliz", drawSmiley);
+        createCard("Triángulos Variados", drawVariedTriangles);
+        createCard("Patrón de Arcos", drawArcs);
+        createCard("Curvas", drawQuadraticCurves);
+        createCard("Segunda curva", drawCubicCurves);
+        createCard("Rectángulos Redondeados", drawRoundedRect);
+        createCard("PacMan (Rectángulo y Círculo)", drawPath2D);
+        createCard("Corazón", drawHeart);  // Nueva tarjeta con el corazón
+    </script>
 </body>
 </html>
