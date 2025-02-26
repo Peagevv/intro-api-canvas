@@ -60,22 +60,20 @@
         }
 
         function drawTriangle(ctx) {
+            ctx.beginPath();
+            ctx.moveTo(20, 80);
+            ctx.lineTo(80, 80);
+            ctx.lineTo(50, 20);
+            ctx.closePath();
+            ctx.fillStyle = "black";
+            ctx.fill();
+            ctx.strokeStyle = "red";
+            ctx.lineWidth = 2;
+            ctx.stroke();
 
              ctx.fillStyle = "black";
 
-        // Dibuja el primer triángulo
-        ctx.beginPath();
-        ctx.moveTo(20, 20);
-        ctx.lineTo(80, 20);
-        ctx.lineTo(80, 80);
-        ctx.fill();
-
-        // Dibuja el segundo triángulo con una ligera separación
-        ctx.beginPath();
-        ctx.moveTo(90, 20);  // Desplazamos 10px hacia la derecha
-        ctx.lineTo(150, 20);
-        ctx.lineTo(150, 80);
-        ctx.fill();
+       ;
 
         // Dibuja el tercer triángulo con una ligera separación
         ctx.beginPath();
@@ -84,8 +82,7 @@
         ctx.lineTo(220, 80);
         ctx.fill();
 
-        // Dibuja el borde del rectángulo
-        ctx.strokeRect(20, 20, 60, 60);
+        
         }
 
         function drawSmiley(ctx) {
@@ -242,9 +239,9 @@
         createCard("Triángulos Variados", drawVariedTriangles);
         createCard("Patrón de Arcos", drawArcs);
         createCard("Curvas", drawQuadraticCurves);
-        createCard("Segunda curva", drawCubicCurves);
+        createCard("Segunda", drawCubicCurves);
         createCard("Rectángulos Redondeados", drawRoundedRect);
-        createCard("PacMan (Rectángulo y Círculo)", drawPath2D);
+        createCard("Path2D (Rectángulo y Círculo)", drawPath2D);
         createCard("Corazón", drawHeart);  // Nueva tarjeta con el corazón
     </script>
 </body>
