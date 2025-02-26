@@ -62,7 +62,16 @@
         function drawTriangle(ctx) {
             ctx.beginPath();
             ctx.moveTo(20, 80);
-            ctx.lineTo(80, 80);
+            ctx.lineTo(80,console.log("Rectángulos");
+console.log("Triángulo");
+console.log("Carita Feliz");
+console.log("Triángulos Variados");
+console.log("Patrón de Arcos");
+console.log("Curvas");
+console.log("Segunda curva");
+console.log("Rectángulos Redondeados");
+console.log("Path2D (Rectángulo y Círculo)");
+console.log("Corazón"); 80);
             ctx.lineTo(50, 20);
             ctx.closePath();
             ctx.fillStyle = "black";
@@ -119,13 +128,6 @@
                     ctx.stroke();
                 }
             }
-        }
-
-        function drawQuadraticCurves(ctx) {
-            ctx.beginPath();
-            ctx.moveTo(20, 80);
-            ctx.quadraticCurveTo(50, 20, 80, 80);
-            ctx.stroke();
         }
 
         function drawCubicCurves(ctx) {
@@ -238,7 +240,6 @@
         createCard("Carita Feliz", drawSmiley);
         createCard("Triángulos Variados", drawVariedTriangles);
         createCard("Patrón de Arcos", drawArcs);
-        createCard("Curvas", drawQuadraticCurves);
         createCard("Segunda", drawCubicCurves);
         createCard("Rectángulos Redondeados", drawRoundedRect);
         createCard("Path2D (Rectángulo y Círculo)", drawPath2D);
